@@ -1,19 +1,24 @@
 const path = require('path');
-
 const express = require('express');
-
 const app = express();
-
 const PORT = process.env.PORT || 3001;
 
+// routes variables
 const indexRoutes = require('./routes/index');
+const createCircleRoutes = require('./routes/create-circle');
+const discoverRoutes = require('./routes/discover');
 
+// setting view paths and view engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// importing models
+const Circle = require('./models/circles');
+const sequelize = require('./util/database');
 
 // Code for Auth0
 
@@ -36,8 +41,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 // });
 
+// importing routes
 app.use(indexRoutes);
+app.use(createCircleRoutes);
+app.use(discoverRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is up on port ${PORT}`);
-});
+// creating tables and dropping if they don't exist, will remove force: true after development
+sequelize
+    .sync()
+    .then(result => {
+        app.listen(PORT, console.log(`Server is up on port ${PORT}`));
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
