@@ -3,4 +3,4 @@ exports.getIndex = (req, res, next) => {
         pageTitle: 'Crescendo',
         path: '/'
     })
-}
+};
