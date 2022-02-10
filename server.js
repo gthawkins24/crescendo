@@ -1,10 +1,11 @@
+require('dotenv').config()
 const path = require('path');
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
-const indexRouter = require('./routes/index');
+const indexRoutes = require('./routes/index');
 const { auth } = require('express-openid-connect');
-require('dotenv').config()
+
 
 const config = {
     authRequired: false,
@@ -25,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(auth(config));
 
 
-app.use(indexRouter);
+app.use(indexRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is up on port ${PORT}`);
