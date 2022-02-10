@@ -1,7 +1,7 @@
 <head>
 <%- include('./includes/head.ejs') %>
 
-<h1>Hey, it works!</h1>
+<h1>Welcome to Crescendo</h1>
 
 <%- include('./includes/end.ejs') %>
 </head>
@@ -9,8 +9,11 @@
 <body>
     <nav>
         <ul>
+            <% if(isAuthenticated) { %>
             <li><a href="/login/">Login</a></li>
+            <% } else { %>
             <li><a href="/logout/">Logout</a></li>
+            <% } %>
         </ul>
     </nav>
 </body>
