@@ -19,7 +19,7 @@ exports.postCreateCircle = (req, res, next) => {
     }).then(result => {
         res.redirect('/create-circle');
     }).catch((err) => {
-        const err_msg = 'Circle Already Exists!';
+        const err_msg = 'A Circle With That Title Already Exists!';
         const uniqueTitleEntry = 'title must be unique';
         if (uniqueTitleEntry === err.errors[0].message) {
             console.log('Circle Already Exists!');
