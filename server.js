@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 
 // routes variables
@@ -17,42 +18,59 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // importing models
-const Circle = require('./models/circles');
 const sequelize = require('./util/database');
+const Circle = require('./models/circles');
+const User = require('./models/user');
 
 // Code for Auth0
+const { auth, requiresAuth } = require('express-openid-connect');
 
-// const { auth } = require('express-openid-connect');
+app.use(
+    auth({
+        authRequired: false,
+        auth0Logout: true,
+        issuerBaseURL: process.env.ISSUER_BASE_URL,
+        baseURL: process.env.BASE_URL,
+        clientID: process.env.CLIENT_ID,
+        secret: process.env.SECRET,
+    })
+);
 
-// const config = {
-//     authRequired: false,
-//     auth0Logout: true,
-//     secret: 'a long, randomly-generated string stored in env',
-//     baseURL: 'http://localhost:3000',
-//     clientID: 'TtrlKMMX4zfjKVPQuZ96Hd95BOq4EMw8',
-//     issuerBaseURL: 'https://dev-jbxgq0fu.us.auth0.com'
-// };
+app.get('/', requiresAuth(), (req, res, next) => {
+    let username = req.oidc.user.nickname
+    let queryName;
+    console.log('heyo2');
 
-// // auth router attaches /login, /logout, and /callback routes to the baseURL
-// app.use(auth(config));
-
-// // req.isAuthenticated is provided from the auth router
-// app.get('/', (req, res) => {
-//     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-// });
+    User.findAll({ where: {username: username} 
+    })
+    .then(user => {
+        if (user.length > 0) {
+            const existingUser = user[0].username
+            console.log('already exists');
+            return existingUser
+        } else {
+            User.create({ username: username });
+            console.log(user.username);
+            return
+        }
+    })
+    .then(user => {
+        console.log(`2: ${user}`);
+        next();
+    })
+    .catch(err => {
+        console.log(err);
+    })
+})
 
 // importing routes
 app.use(indexRoutes);
 app.use(createCircleRoutes);
 app.use(discoverRoutes);
 
-// creating tables and dropping if they don't exist, will remove force: true after development
-sequelize
-    .sync()
-    .then(result => {
-        app.listen(PORT, console.log(`Server is up on port ${PORT}`));
-    })
-    .catch(err => {
-        console.log(err);
-    });
+const getUsername = require('./controllers/index');
 
+// { force: true } only set under development
+sequelize.sync()
+
+app.listen(PORT, console.log(`Server is up on port ${PORT}`));

@@ -4,6 +4,12 @@ const router = express.Router();
 
 const indexController = require('../controllers/index');
 
-router.get('/', indexController.getIndex);
+const { auth, requiresAuth } = require('express-openid-connect');
+
+router.get('/', requiresAuth(), indexController.getIndex);
+
+// router.get('/', indexController.getUsername);
+
+// router.post('/', )
 
 module.exports = router;
