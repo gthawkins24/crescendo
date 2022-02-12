@@ -39,7 +39,7 @@ app.use(
 app.get('/', requiresAuth(), (req, res, next) => {
     let username = req.oidc.user.nickname
     let queryName;
-    console.log('heyo2');
+    console.log('Welcome to Crescendo');
 
     User.findAll({ where: {username: username} 
     })

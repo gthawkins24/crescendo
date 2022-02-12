@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize ('crescendo_db', 'root', '123', {
+const sequelize = new Sequelize ('crescendo_db', 'root', 'ChPiAr121191$', {
     dialect: 'mysql',
     host: 'localhost'
 });
