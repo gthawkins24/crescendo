@@ -1,0 +1,16 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    font-family:'Dancing Script', cursive;
+    text-align: center;
+    color: rgb(17, 6, 58);
+    margin: auto;
+    padding: 5%;
+}
+
+p {
+    text-align: center;
+    padding: 5%;
+}
