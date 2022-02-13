@@ -8,22 +8,25 @@
         <% if(locals.err_msg) { %>
             <div class="alert alert-danger" role="alert"><%= err_msg %></div>
         <% } %>
-        
+        <div class="col-md-9 mx-auto m-5 p-5">
+            <h1> Here you can create a Circle witha topic, description, and an image to start a conversation. </h1>
+
         <form class="new-circle-form" method="POST" action="/create-circle">
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" class="form-control" id="title">
+                <label for="title" class="form-label"></label>
+                <input type="text" name="title" class="form-control" id="title" placeholder="Topic">
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <input type="text" name="description" class="form-control" id="description">
+                <label for="description" class="form-label"></label>
+                <input type="text" name="description" class="form-control" id="description" placeholder="Desctription">
             </div>
             <div class="mb-3">
-                <label for="imageUrl" class="form-label">Image URL</label>
-                <input type="text" name="imageUrl" class="form-control" id="imageUrl">
+                <label for="imageUrl" class="form-label"></label>
+                <input type="text" name="imageUrl" class="form-control" id="imageUrl" placeholder="ImageURL">
             </div>
-            <button type="submit" class="btn btn-primary">Create Circle</button>
+            <button type="submit" class="btn btn-light">Create Circle</button>
         </form>
+        </div>
     </main>
 
     <%- include('../includes/end.ejs') %>
