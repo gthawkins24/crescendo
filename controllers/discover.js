@@ -1,4 +1,4 @@
-const Circle = require('../models/circles');
+const Circle = require('../models/circle');
 
 exports.getCircles = (req, res, next) => {
     Circle.findAll()

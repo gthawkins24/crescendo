@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // importing models
 const sequelize = require('./util/database');
-const Circle = require('./models/circles');
+const Circle = require('./models/circle');
 const User = require('./models/user');
 
 // Code for Auth0
@@ -63,15 +63,12 @@ app.get('/', requiresAuth(), (req, res, next) => {
     })
 })
 
-// declaring relationships in DB
-User.hasMany(Circle);
-
 // importing routes
 app.use(indexRoutes);
 app.use(createCircleRoutes);
 app.use(discoverRoutes);
 
 // { force: true } only set under development
-sequelize.sync()
+sequelize.sync({ force: true })
 
 app.listen(PORT, console.log(`Server is up on port ${PORT}`));

@@ -1,4 +1,4 @@
-const Circle = require('../models/circles');
+const Circle = require('../models/circle');
 
 exports.getCreateCircle = (req, res, next) => {
     res.render('create-circle/create-circle', {
