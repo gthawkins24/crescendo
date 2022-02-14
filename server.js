@@ -63,12 +63,13 @@ app.get('/', requiresAuth(), (req, res, next) => {
     })
 })
 
+// declaring relationships in DB
+User.hasMany(Circle);
+
 // importing routes
 app.use(indexRoutes);
 app.use(createCircleRoutes);
 app.use(discoverRoutes);
-
-const getUsername = require('./controllers/index');
 
 // { force: true } only set under development
 sequelize.sync()
