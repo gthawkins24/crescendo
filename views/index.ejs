@@ -3,7 +3,7 @@
 
 <%- include('./includes/navigation.ejs') %>
 <main>
-    
+
 <div class="container-fluid">
 
     <h1>Welcome to Crescendo!</h1>
@@ -26,7 +26,7 @@
                         <form action="/discover" method="POST">
                             <div class="col text-center">
                             <input type="hidden" value="<%= circle.id %>" name="circleId">    
-                                <button type="submit" class="btn btn-primary">Follow Circle</button>
+                                <button type="submit" class="btn btn-primary">Unfollow</button>
                                 <a href="/" class="btn btn-primary">View Circle</a>
                             </div>
                         </form>

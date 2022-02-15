@@ -1,7 +1,5 @@
-const User = require("../models/user");
-const Follow = require("../models/follow");
 const sequelize = require("../util/database");
-const { Circle } = require("../models");
+const { Circle, User, Follow } = require("../models");
 
 exports.displayFollowedCircles = (req, res, next) => {
     const userNickname = req.oidc.user.nickname;
@@ -18,14 +16,12 @@ exports.displayFollowedCircles = (req, res, next) => {
         followed.forEach(circle => {
             followedIdsArray.push(circle.dataValues.circle_id);
         });
-        return followedIdsArray
+        return followedIdsArray;
     })
     .then(followedIdsArray => {
-
-        return followedIdsArray.forEach(circle => Circle.findAll({ where: { id: circle } }));
+        return Circle.findAll({ where: { id: followedIdsArray } });
     })
     .then(followedCircles => {
-        console.log(followedCircles);
         res.render('index', {
             circs: followedCircles,
             pageTitle: 'Crescendo', 
