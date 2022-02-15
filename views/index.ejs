@@ -23,9 +23,10 @@
                     <div class="card-body justify-content-center">
                         <h5 class="card-title"><%= circle.title %></h5>
                         <p class="card-text"><%= circle.description %></p>
-                        <form action="/discover" method="POST">
+                        <form action="/" method="post">
                             <div class="col text-center">
-                            <input type="hidden" value="<%= circle.id %>" name="circleId">    
+                            <input type="hidden" value="<%= circle.id %>" name="circleId">
+                            <button type="submit" class="btn btn-primary">Unfollow</button>    
                                 <a href="/" class="btn btn-primary">View Circle</a>
                             </div>
                         </form>

@@ -30,10 +30,19 @@ exports.displayFollowedCircles = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-// Post.findAll({
-//     where: {
-//       authorId: {
-//         [Op.or]: [12, 13]
-//       }
-//     }
-//   });
+exports.postUnfollow = (req, res, next) => {
+    const userNickname = req.oidc.user.nickname;
+    const circleId = req.body.circleId;
+
+    User.findAll({ where: {username: userNickname} })
+    .then(user => {
+        const UserId = user[0].id;
+        return Follow.findAll({ where: { user_id: UserId, circle_id: circleId} })        
+    })
+    .then(circle => {
+        const toBeDeletedCircle = circle[0];
+        toBeDeletedCircle.destroy();
+        res.redirect('/');
+    })
+    .catch(err => console.log(err));
+}

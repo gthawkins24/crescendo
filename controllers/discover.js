@@ -2,17 +2,6 @@ const { Follow, User } = require('../models');
 const Circle = require('../models/circle');
 const { Op } = require('sequelize')
 
-// exports.getCircles = (req, res, next) => {
-//     Circle.findAll()
-//     .then(circles => {
-//         res.render('discover/discover', {
-//             circs: circles,
-//             pageTitle: 'Discover',
-//             path: '/discover'
-//         });
-//     }).catch(err => console.log(err));
-// };
-
 exports.getCircles = (req, res, next) => {
     const userNickname = req.oidc.user.nickname;
     

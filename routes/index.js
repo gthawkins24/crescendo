@@ -8,4 +8,6 @@ const { auth, requiresAuth } = require('express-openid-connect');
 
 router.get('/', indexController.displayFollowedCircles);
 
+router.post('/', indexController.postUnfollow);
+
 module.exports = router;
