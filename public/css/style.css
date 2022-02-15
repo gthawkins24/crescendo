@@ -28,9 +28,9 @@ p {
     color: silver;
 }
 
-.Title {
-    font-family:'Dancing Script', cursive;
-    font-size: 2rem;
+.card {
+    max-width: 600px;
+    min-height: 600px;
 }
 
 

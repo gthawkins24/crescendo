@@ -8,10 +8,10 @@
         <% if (circs.length > 0) { %>
             <div class="container">
                 <% for (let circle of circs) { %>
-                <div class="col-md-9 mx-auto m-5 p-5">
-                    <div class="card" style="width: 35rem;">
+                <div class="col-9 mx-auto">
+                    <div class="container card d-flex justify-content-center">
                         <img src="<%= circle.imageUrl %>" class="card-img-top" alt="...">
-                        <div class="card-body justify-content-center">
+                        <div class="card-body justify-content-center align-items-center">
                             <h5 class="card-title"><%= circle.title %></h5>
                             <p class="card-text"><%= circle.description %></p>
                             <form action="/follow-circle" method="POST">
