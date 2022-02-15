@@ -21,16 +21,16 @@ Post.init(
         circle_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'circles',
+                model: 'circle',
                 key: 'id'
             }
-        }
+        },
     },
     {
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'Post'
+        modelName: 'post'
     }
 )
 

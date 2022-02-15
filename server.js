@@ -69,6 +69,6 @@ app.use(createCircleRoutes);
 app.use(discoverRoutes);
 
 // { force: true } only set under development
-sequelize.sync({ force: true })
+sequelize.sync({ alter: true })
 
 app.listen(PORT, console.log(`Server is up on port ${PORT}`));
