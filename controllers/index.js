@@ -3,7 +3,6 @@ const { Circle, User, Follow } = require("../models");
 
 exports.displayFollowedCircles = (req, res, next) => {
     const userNickname = req.oidc.user.nickname;
-    // const userId = Follow.findAll({ where: { user_id: userName[0].id } });
     
     User.findAll({ where: {username: userNickname} 
     })
@@ -31,6 +30,10 @@ exports.displayFollowedCircles = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-// const { Op } = require("sequelize");
-// Post.findAll({ where: { authorId: { [Op.eq]: 2 } } });
-// // SELECT * FROM post WHERE authorId = 2;
+// Post.findAll({
+//     where: {
+//       authorId: {
+//         [Op.or]: [12, 13]
+//       }
+//     }
+//   });
