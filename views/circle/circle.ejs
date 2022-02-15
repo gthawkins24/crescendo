@@ -1,0 +1,31 @@
+<%- include('./includes/head.ejs') %>
+</head>
+
+<%- include('./includes/navigation.ejs') %>
+<main>
+
+    <% if (circs.length > 0) { %>
+        <div class="container">
+            <% for (let circle of circs) { %>
+            <div class="col-md-9 mx-auto m-5 p-5">
+                <div class="card" style="width: 35rem;">
+                    <img src="<%= circle.imageUrl %>" class="card-img-top" alt="...">
+                    <div class="card-body justify-content-center">
+                        <h5 class="card-title"><%= circle.title %></h5>
+                        <p class="card-text"><%= circle.description %></p>
+                        <form action="/" method="post">
+                            <div class="col text-center">
+                            <input type="hidden" value="<%= circle.id %>" name="circleId">
+                            <button type="submit" class="btn btn-primary">Unfollow</button>    
+                                <a href="/" class="btn btn-primary">View Circle</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    <% } %>
+</main>
+
+<%- include('./includes/end.ejs') %>
