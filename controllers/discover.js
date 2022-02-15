@@ -30,12 +30,16 @@ exports.getCircles = (req, res, next) => {
         return followedIdsArray;
     })
     .then(followedIdsArray => {
-        return Circle.findAll({ 
+        let array = Circle.findAll({ 
             where: { 
                 id: {
                     [Op.not]: followedIdsArray }
                 }
-        });
+        })
+        if (!array) {
+            next()
+        }
+        return array;
     })
     .then(followedCircles => {
         res.render('discover/discover', {
