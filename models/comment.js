@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const seuqelize = require('../util/database');
+const sequelize = require('../util/database');
 
 class Comment extends Model {};
 
@@ -32,6 +32,7 @@ Comment.init(
     },
     {
         sequelize,
+        freezeTableName: true,
         modelName: 'comment'
     }
 );

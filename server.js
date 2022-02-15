@@ -39,7 +39,6 @@ app.use(
 app.get('/', requiresAuth(), (req, res, next) => {
     let username = req.oidc.user.nickname
     let queryName;
-    console.log('Welcome to Crescendo');
 
     User.findAll({ where: {username: username} 
     })
@@ -50,12 +49,11 @@ app.get('/', requiresAuth(), (req, res, next) => {
             return existingUser
         } else {
             User.create({ username: username });
-            console.log(user.username);
             return
         }
     })
     .then(user => {
-        console.log(`2: ${user}`);
+        console.log(user);
         next();
     })
     .catch(err => {
@@ -69,6 +67,6 @@ app.use(createCircleRoutes);
 app.use(discoverRoutes);
 
 // { force: true } only set under development
-sequelize.sync({ alter: true })
+sequelize.sync();
 
 app.listen(PORT, console.log(`Server is up on port ${PORT}`));

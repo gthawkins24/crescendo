@@ -6,10 +6,6 @@ const indexController = require('../controllers/index');
 
 const { auth, requiresAuth } = require('express-openid-connect');
 
-router.get('/', requiresAuth(), indexController.getIndex);
-
-// router.get('/', indexController.getUsername);
-
-// router.post('/', )
+router.get('/', indexController.displayFollowedCircles);
 
 module.exports = router;
