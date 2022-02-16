@@ -19,11 +19,11 @@ exports.getPosts = (req, res, next) => {
     .then(posts => {
         res.render('view-circle/view-circle', {
             posts: posts,
-            pageTitle: 'Circle',
+            pageTitle: 'Circle View',
             path: '/view-circle'
         })
     })
-}
+};
 
 exports.postNewPost = (req, res, next) => {
     const userNickname = req.oidc.user.nickname
