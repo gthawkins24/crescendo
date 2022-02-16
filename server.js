@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3001;
 const indexRoutes = require('./routes/index');
 const createCircleRoutes = require('./routes/create-circle');
 const discoverRoutes = require('./routes/discover');
+const viewCircleRoutes = require('./routes/view-circle');
 
 // setting view paths and view engine
 app.set('view engine', 'ejs');
@@ -65,6 +66,7 @@ app.get('/', requiresAuth(), (req, res, next) => {
 app.use(indexRoutes);
 app.use(createCircleRoutes);
 app.use(discoverRoutes);
+app.use(viewCircleRoutes);
 
 // { force: true } only set under development
 sequelize.sync();

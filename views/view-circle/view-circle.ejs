@@ -1,0 +1,90 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<%- include('../includes/navigation.ejs') %>
+<main>
+<!-- Circle Card -->
+        <div class="container my-4">
+            <div class="row justify-content-evenly">
+                <div class="col-6">
+                    <div class="card" style="width: 35rem;">
+                        <img src="<%= circle.imageUrl %>" class="card-img-top" alt="...">
+                        <div class="card-body justify-content-center">
+                            <h5 class="card-title"><%= circle.title %></h5>
+                            <p class="card-text"><%= circle.description %></p>
+                            <form action="/" method="get">
+                                <div class="col text-center">
+                                <input type="hidden" value="<%= circle.id %>" name="circleId">
+                                <button type="submit" class="btn btn-primary">Unfollow</button>    
+                                </div>
+                            </form>
+                        </div>
+                        
+<!--Collapsible Post Addition-->
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#postCollapse" aria-expanded="false" aria-controls="postCollapse">
+                            Create Post in <%= circle.title %>
+                        </button>
+
+                        <div class="collapse" id="postCollapse">
+                            <div class="card card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="postTitle" class="form-label">Post Title</label>
+                                        <input type="text" name="postTitle" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="postImageUrl" class="form-label">Post ImageURL</label>
+                                        <input type="text" name="postImageUrl" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="postBody" class="form-label">Post Content</label>
+                                        <textarea id="postBodyInput" type="text" name="postBody" class="form-control"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--Sample Post Card-->                
+                <div class="col-6">
+                    <div class="card" style="width: 30rem;">
+                        <h5 class="card-title">Post Title Goes Here</h5>
+                        <img src="https://media.istockphoto.com/photos/rock-band-playing-at-a-nightclub-picture-id1129172065?b=1&k=20&m=1129172065&s=170667a&w=0&h=v-Pod4G29_XGsVESvkUCGfTMH2R_RfLo5CNss69SOvA=" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Post Content Goes Here</p>
+                        </div>
+
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#commentCollapse" aria-expanded="false" aria-controls="commentCollapse">
+                            Create Post in <%= circle.title %>
+                        </button>
+<!--Collapsible Comment Section-->
+                        <div class="collapse" id="commentCollapse">
+                            <div class="card card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="commentText" class="form-label">Comment</label>
+                                        <textarea id="commentTextInput" type="text" name="commentText" class="form-control"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4" style="width: 30rem;">
+                        <h5 class="card-title">Post Title Goes Here</h5>
+                        <img src="https://media.istockphoto.com/photos/rock-band-playing-at-a-nightclub-picture-id1129172065?b=1&k=20&m=1129172065&s=170667a&w=0&h=v-Pod4G29_XGsVESvkUCGfTMH2R_RfLo5CNss69SOvA=" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Post Content Goes Here</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+</main>
+
+<%- include('../includes/end.ejs') %>
+

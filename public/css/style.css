@@ -33,5 +33,13 @@ p {
     font-size: 2rem;
 }
 
+#commentTextInput {
+    height: 10rem;
+}
+
+#postBodyInput {
+    height: 10rem;
+}
+
 
 

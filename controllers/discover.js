@@ -1,6 +1,5 @@
-const { Follow, User } = require('../models');
-const Circle = require('../models/circle');
-const { Op } = require('sequelize')
+const { Follow, User, Circle } = require('../models');
+const { Op } = require('sequelize');
 
 exports.getCircles = (req, res, next) => {
     const userNickname = req.oidc.user.nickname;
