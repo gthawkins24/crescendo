@@ -6,42 +6,93 @@ exports.getCircle = (req, res, next) => {
 
     Circle.findByPk(circleId)
     .then(circle => {
-        res.render('view-circle/view-circle', {
-            circle: circle,
-            pageTitle: `Crescendo: ${circle.title}`,
-            path:'/view-circle'
-        });
+        res.locals.circle = circle;
+        next();
     })
     .catch(err => console.log(err));
 };
 
-exports.postNewPost = (req, res, next) => {
+exports.getPosts = (req, res, next) => {
     const circleId = req.params.circleId;
-    const title = req.params.postTitle;
-    const imageUrl = req.params.imageUrl;
+    
+    Post.findAll({ where: { circle_id: circleId } })
+    .then(posts => {
+        res.render('view-circle/view-circle', {
+            posts: posts,
+            pageTitle: 'Circle',
+            path: '/view-circle'
+        })
+    })
+}
 
-    Post.create({
-        title: postTitle,
-        imageUrl: postImageUrl,
-        description: postBody,
+exports.postNewPost = (req, res, next) => {
+    const userNickname = req.oidc.user.nickname
+    const circleId = req.body.circleId;
+    const title = req.body.postTitle;
+    const imageUrl = req.body.postImageUrl;
+    const description = req.body.postBody;
 
+    User.findAll({ where: {username: userNickname} 
+    })
+    .then(user => {
+        const userId = user[0].id;
+        return userId
+    })
+    .then(userId => {
+        console.log(imageUrl, description, title, circleId)
+        Post.create({
+            title: title,
+            imageUrl: imageUrl,
+            description: description,
+            circle_id: circleId,
+            user_id: userId
+        })
     })
     .then(result => {
-        res.redirect('/create-circle');
+        res.redirect('back');
     })
     .catch((err) => {
-        const err_msg = 'A Post With That Title Already Exists!';
-        const uniqueTitleEntry = 'title must be unique';
-        if (uniqueTitleEntry === err.errors[0].message) {
-            console.log('Post With That title Already Exists!');
-            return res.render('view-circle/view-circle/:circleId', {
-                err_msg: err_msg,
-                pageTitle: `Crescendo: ${circle.title}`,
-                path: '/create-circle'
-            });
-        } else {
-            return res.render('/');
-        }
-        console.log(err)
+        console.log(err);
     });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // const err_msg = 'A Post With That Title Already Exists!';
+        // const uniqueTitleEntry = 'title must be unique';
+        // if (uniqueTitleEntry === err.errors[0].message) {
+        //     console.log('Post With That title Already Exists!');
+        //     return res.render('view-circle/view-circle/:circleId', {
+        //         err_msg: err_msg,
+        //         pageTitle: `Crescendo: ${circle.title}`,
+        //         path: '/create-circle'
+        //     });
+        // } else {
+        //     console.log(err);
+        //     return res.render('/');
+        // }
+
+        // .then(result => {
+        //     res.render('view-circle/view-circle', {
+        //         circle: circle,
+        //         pageTitle: `Crescendo: ${circle.title}`,
+        //         path:'/view-circle'
+        //     });
+        // })

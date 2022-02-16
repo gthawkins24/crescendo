@@ -51,7 +51,7 @@ exports.postFollowCircle = (req, res, next) => {
             user_id: UserId,
             circle_id: parseInt(circleId)
         })
-        res.redirect('/');
+        res.redirect('/discover');
     })
     .catch(err => console.log(err));
 };
