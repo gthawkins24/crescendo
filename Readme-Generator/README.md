@@ -44,7 +44,7 @@
       Run 'undefined' to start project
   
       ## Questions
-      GitHub Profile: https://github.com/undefined
+      GitHub Profile: https://github.com/gthawkins24/crescendo.git
       Reach me at undefined with additional questions
    
     
