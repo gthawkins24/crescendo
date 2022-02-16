@@ -10,7 +10,7 @@
                     <div class="card" style="width: 35rem;" id="circle-card">
                         <img src="<%= circle.imageUrl %>" class="card-img-top" alt="...">
                         <div class="card-body justify-content-center">
-                            <h5 class="card-title"><%= circle.title %></h5>
+                            <h4 class="card-title" id="circle-card-title"><%= circle.title %></h4>
                             <p class="card-text"><%= circle.description %></p>
                             <form action="/" method="get">
                                 <div class="col text-center">
@@ -52,22 +52,21 @@
             <% if (posts.length > 0) { %>
                 <% for (let p of posts) { %>    
                 <div class="col-6">
-                    <div class="card" style="width: 30rem;">
-                        <h5 class="card-title"><%= p.title %></h5>
+                    <form action="/view-post" method="GET">
+                    <div class="card my-4" style="width: 30rem;">
+                        <p class="card-title" id="post-card-title"><%= p.title %></p>
                         <img src="<%= p.imageUrl %>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text"><%= p.description %></p>
                         </div>
-<!--Sample Comment Card-->
-                        <div class="card-body" id="commentCard">
-                            <h4>SampleUsername:</h4>
-                            <p>This is a sample comment</p>
-                        </div>
-
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#commentCollapse" aria-expanded="false" aria-controls="commentCollapse">
-                            Add Comment
-                        </button>
-
+                            <input type="hidden" value="<%= circle.id %>" name="circleId">
+                            <input type="hidden" value="<%= p.id %>" name="postId">
+                            <a class="btn btn-primary" href="/view-post/<%= circle.id %>/<%= p.id %>">
+                                View Post
+                            </a>
+                        </form>
+                    </div>
+                </div>
                 <% } %>
             <% } %>
             </div>

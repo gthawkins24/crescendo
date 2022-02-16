@@ -6,6 +6,7 @@ exports.getCircle = (req, res, next) => {
 
     Circle.findByPk(circleId)
     .then(circle => {
+        console.log(circle);
         res.locals.circle = circle;
         next();
     })

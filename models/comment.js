@@ -15,17 +15,24 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false
         },      
-            user_id: {
-                type: DataTypes.INTEGER,
-                references: {
-                    model: 'user',
-                    key: 'id'
-                }
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
         },
         circle_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'circle',
+                key: 'id'
+            }
+        },
+        post_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'post',
                 key: 'id'
             }
         }

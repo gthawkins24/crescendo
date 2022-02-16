@@ -9,6 +9,7 @@ const indexRoutes = require('./routes/index');
 const createCircleRoutes = require('./routes/create-circle');
 const discoverRoutes = require('./routes/discover');
 const viewCircleRoutes = require('./routes/view-circle');
+const viewPostRoutes = require('./routes/view-post');
 
 // setting view paths and view engine
 app.set('view engine', 'ejs');
@@ -69,5 +70,6 @@ app.use(indexRoutes);
 app.use(createCircleRoutes);
 app.use(discoverRoutes);
 app.use(viewCircleRoutes);
+app.use(viewPostRoutes);
 
 app.listen(PORT, console.log(`Server is up on port ${PORT}`));
