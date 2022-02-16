@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // importing models
+const { Sequelize } = require('sequelize');
 const sequelize = require('./util/database');
 const Circle = require('./models/circle');
 const User = require('./models/user');
@@ -39,9 +40,10 @@ app.use(
 
 app.get('/', requiresAuth(), (req, res, next) => {
     let username = req.oidc.user.nickname
-    let queryName;
 
-    User.findAll({ where: {username: username} 
+    sequelize.sync()
+    .then(result => {
+        return User.findAll({ where: {username: username} })
     })
     .then(user => {
         if (user.length > 0) {
@@ -49,8 +51,8 @@ app.get('/', requiresAuth(), (req, res, next) => {
             console.log('already exists');
             return existingUser
         } else {
-            User.create({ username: username });
-            return
+            console.log('creating new user');
+            return User.create({ username: username });
         }
     })
     .then(user => {
@@ -60,15 +62,12 @@ app.get('/', requiresAuth(), (req, res, next) => {
     .catch(err => {
         console.log(err);
     })
-})
+});
 
 // importing routes
 app.use(indexRoutes);
 app.use(createCircleRoutes);
 app.use(discoverRoutes);
 app.use(viewCircleRoutes);
-
-// { force: true } only set under development
-sequelize.sync();
 
 app.listen(PORT, console.log(`Server is up on port ${PORT}`));

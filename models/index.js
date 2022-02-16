@@ -6,17 +6,13 @@ const Post = require('./post');
 const Circle = require('./circle');
 
 // creating associations
-// User.hasMany(Post, {
-//     foreignKey: 'user_id'
-// });
+User.hasMany(Post, {
+    foreignKey: 'user_id'
+});
 
-// Post.belongsTo(User, {
-//     foreignKey: 'user_id',
-// });
-
-// Post.belongsTo(Circle, {
-//     foreignKey: 'circle_id'
-// });
+Post.belongsTo(Circle, {
+    foreignKey: 'circle_id'
+});
 
 Circle.belongsToMany(User, {
     through: Follow,

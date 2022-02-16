@@ -7,7 +7,12 @@ exports.displayFollowedCircles = (req, res, next) => {
     User.findAll({ where: {username: userNickname} 
     })
     .then(userName => {
-        return Follow.findAll({ where: { user_id: userName[0].id } })
+        if (!userName) {
+            console.log('no user with that name exists!')
+            return res.redirect('/')
+        } else {
+            return Follow.findAll({ where: { user_id: userName[0].id } })
+        }
     })
     .then(followed => {
         let followedIdsArray = [];

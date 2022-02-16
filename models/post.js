@@ -25,6 +25,18 @@ Post.init(
                 key: 'id'
             }
         },
+        title: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        imageUrl: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        description: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        }
     },
     {
         sequelize,
