@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const seuqelize = require('../util/database');
+const sequelize = require('../util/database');
 
 class Comment extends Model {};
 
@@ -15,12 +15,12 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false
         },      
-            user_id: {
-                type: DataTypes.INTEGER,
-                references: {
-                    model: 'user',
-                    key: 'id'
-                }
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'user',
+                key: 'id'
+            }
         },
         circle_id: {
             type: DataTypes.INTEGER,
@@ -28,10 +28,22 @@ Comment.init(
                 model: 'circle',
                 key: 'id'
             }
+        },
+        post_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'post',
+                key: 'id'
+            }
+        },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     },
     {
         sequelize,
+        freezeTableName: true,
         modelName: 'comment'
     }
 );

@@ -1,0 +1,59 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<%- include('../includes/navigation.ejs') %>
+<main>
+    <div class="container my-4">
+        <div class="row justify-content-evenly">
+<!--Post Card-->
+            <div class="col-6">
+                <div class="card" style="width: 35rem;" id="circle-card">
+                    <img src="<%= post.imageUrl %>" class="card-img-top" alt="...">
+                    <div class="card-body justify-content-center">
+                        <h4 class="card-title" id="circle-card-title"><%= post.title %></h4>
+                        <p class="card-text"><%= post.description %></p>
+                        <form action="/" method="get">
+                            <div class="col text-center">
+                            <input type="hidden" value="<%= post.id %>" name="postId">    
+                            </div>
+                        </form>
+                    </div>
+                    
+<!--Collapsible Comment Addition-->
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#postCollapse" aria-expanded="false" aria-controls="postCollapse">
+                        Add Comment
+                    </button>
+
+                    <div class="collapse" id="postCollapse">
+                        <div class="card card-body">
+                            <form method="POST" action="postComment">
+                                <div class="mb-3">
+                                    <label for="postBody" class="form-label">Comment</label>
+                                    <textarea id="postBodyInput" type="text" name="commentBody" class="form-control"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <input type="hidden" value="<%= post.id %>" name="postId">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% if (comments.length > 0) { %>
+            <% for (let comment of comments) { %>
+                <div class="card my-4">
+                    <div id="commentUsername" class="card-header">
+                        <%= comment.username %>
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                        <p><%= comment.comment_text %></p>
+                        </blockquote>
+                    </div>
+                </div>
+            <% } %>
+        <% } %>
+        </div>
+    </div>
+</main>
+
+<%- include('../includes/end.ejs') %>

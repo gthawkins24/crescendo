@@ -25,11 +25,23 @@ Post.init(
                 key: 'id'
             }
         },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        imageUrl: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     },
     {
         sequelize,
-        freezeTableName: true,
         underscored: true,
+        freezeTableName: true,
         modelName: 'post'
     }
 )

@@ -1,6 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../util/database');
 
+class Follow extends Model {};
+
 Follow.init(
     {
         id: {
@@ -25,8 +27,8 @@ Follow.init(
     },
     {
         sequelize,
-        freezeTableName: true,
         underscored: true,
+        freezeTableName: true,
         modelName: 'follow'
     }
 );

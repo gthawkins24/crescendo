@@ -33,5 +33,24 @@ p {
     min-height: 600px;
 }
 
+#commentTextInput {
+    height: 10rem;
+}
 
+#postBodyInput {
+    height: 10rem;
+}
 
+#circle-card-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+#post-card-title {
+    font-weight: bold;
+}
+
+#commentUsername {
+    font-weight: bold;
+}

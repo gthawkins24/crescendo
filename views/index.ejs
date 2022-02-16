@@ -2,8 +2,7 @@
 </head>
 
 <%- include('./includes/navigation.ejs') %>
-
-
+<main>
 
 <div class="container-fluid">
 
@@ -13,5 +12,30 @@
         <p> Crescendo is a platform where like minded individuals foster conversation around Music. All you have to do is sign-up, create a Circle, then post and comment within that Circle. You are free to ask questions, share opinions, and discover new content from others in the community, simple as that. </p>
     </div>
 </div>
+
+
+    <% if (circs.length > 0) { %>
+        <div class="container">
+            <% for (let circle of circs) { %>
+            <div class="col-md-9 mx-auto m-5 p-5">
+                <div class="card" style="width: 35rem;">
+                    <img src="<%= circle.imageUrl %>" class="card-img-top" alt="...">
+                    <div class="card-body justify-content-center">
+                        <h5 class="card-title"><%= circle.title %></h5>
+                        <p class="card-text"><%= circle.description %></p>
+                        <form action="/" method="post">
+                            <div class="col text-center">
+                            <input type="hidden" value="<%= circle.id %>" name="circleId">
+                            <button type="submit" class="btn btn-primary">Unfollow</button>    
+                                <a href="/view-circle/<%= circle.id %>" class="btn btn-primary">View Circle</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    <% } %>
+</main>
 
 <%- include('./includes/end.ejs') %>

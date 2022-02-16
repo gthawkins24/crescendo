@@ -10,33 +10,28 @@ User.hasMany(Post, {
     foreignKey: 'user_id'
 });
 
-Post.belongsTo(User, {
-    foreignKey: 'user_id',
-});
-
 Post.belongsTo(Circle, {
     foreignKey: 'circle_id'
 });
 
-User.belongsToMany(Circle, {
-    through: Follow,
-    as: 'followed_circles',
-
-    foreignKey: 'circle_id',
-});
-
 Circle.belongsToMany(User, {
     through: Follow,
-    as: 'followed_circles',
 
+    foreignKey: 'circle_id'
+});
+
+User.belongsToMany(Circle, {
+    through: Follow,
+    
     foreignKey: 'user_id'
 });
 
-User.belongsToMany(Circle, {
-    through: Follow,
-    as: 'followed_circles',
+Comment.belongsTo(Post, {
+    foreignKey: 'post_id'
+});
 
-    foreignKey: 'circle_id'
+Comment.belongsTo(User, {
+    foreignKey: 'user_id'
 });
 
 module.exports = { User, Follow, Comment, Post, Circle };

@@ -1,0 +1,77 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<%- include('../includes/navigation.ejs') %>
+<main>
+<!-- Circle Card -->
+        <div class="container my-4">
+            <div class="row justify-content-evenly">
+                <div class="col-6">
+                    <div class="card" style="width: 35rem;" id="circle-card">
+                        <img src="<%= circle.imageUrl %>" class="card-img-top" alt="...">
+                        <div class="card-body justify-content-center">
+                            <h4 class="card-title" id="circle-card-title"><%= circle.title %></h4>
+                            <p class="card-text"><%= circle.description %></p>
+                            <form action="/" method="get">
+                                <div class="col text-center">
+                                <input type="hidden" value="<%= circle.id %>" name="circleId">
+                                <button type="submit" class="btn btn-primary">Unfollow</button>    
+                                </div>
+                            </form>
+                        </div>
+                        
+<!--Collapsible Post Addition-->
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#postCollapse" aria-expanded="false" aria-controls="postCollapse">
+                            Create Post in <%= circle.title %>
+                        </button>
+
+                        <div class="collapse" id="postCollapse">
+                            <div class="card card-body">
+                                <form method="POST" action="view-circle">
+                                    <div class="mb-3">
+                                        <label for="postTitle" class="form-label">Post Title</label>
+                                        <input type="text" name="postTitle" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="postImageUrl" class="form-label">Post ImageURL</label>
+                                        <input type="text" name="postImageUrl" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="postBody" class="form-label">Post Content</label>
+                                        <textarea id="postBodyInput" type="text" name="postBody" class="form-control"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <input type="hidden" value="<%= circle.id %>" name="circleId">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<!--Sample Post Card-->
+            <% if (posts.length > 0) { %>
+                <% for (let p of posts) { %>    
+                <div class="col-6">
+                    <form action="/view-post" method="GET">
+                    <div class="card my-4" style="width: 30rem;">
+                        <p class="card-title" id="post-card-title"><%= p.title %></p>
+                        <img src="<%= p.imageUrl %>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text"><%= p.description %></p>
+                        </div>
+                            <input type="hidden" value="<%= circle.id %>" name="circleId">
+                            <input type="hidden" value="<%= p.id %>" name="postId">
+                            <a class="btn btn-primary" href="/view-post/<%= circle.id %>/<%= p.id %>">
+                                View Post
+                            </a>
+                        </form>
+                    </div>
+                </div>
+                <% } %>
+            <% } %>
+            </div>
+        </div>
+</main>
+
+<%- include('../includes/end.ejs') %>
+

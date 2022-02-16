@@ -14,11 +14,11 @@
                         <div class="card-body justify-content-center align-items-center">
                             <h5 class="card-title"><%= circle.title %></h5>
                             <p class="card-text"><%= circle.description %></p>
-                            <form action="/follow-circle" method="POST">
+                            <form action="/discover" method="POST">
                                 <div class="col text-center">
-                                <input type="hidden" value="<%= circle.id %>">    
-                                <button type="submit" class="btn btn-primary">Follow Circle</button>
-                                    <a href="/" class="btn btn-primary">View Circle</a>
+                                <input type="hidden" value="<%= circle.id %>" name="circleId">    
+                                    <button type="submit" class="btn btn-primary">Follow Circle</button>
+                                    <a href="/view-circle/<%= circle.id %>" class="btn btn-primary">View Circle</a>
                                 </div>
                             </form>
                         </div>
