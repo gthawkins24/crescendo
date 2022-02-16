@@ -35,6 +35,10 @@ Comment.init(
                 model: 'post',
                 key: 'id'
             }
+        },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     },
     {
