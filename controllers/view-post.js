@@ -36,8 +36,6 @@ exports.postComment = (req, res, next) => {
 
     User.findOne({where: { username: userName }})
     .then(user => {
-        console.log(user.id);
-        console.log(postId);
         Comment.create({
             user_id: user.id,
             comment_text: commentBody,
